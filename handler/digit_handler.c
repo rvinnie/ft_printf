@@ -29,7 +29,6 @@ t_nbr		precision_checker(t_parser s_parser, t_nbr s_nbr)
 	}
 	else
 		s_nbr.width_zeros = 0;
-	// printf("%d %d %d %d", s_nbr.prec_zeros, s_nbr.width_zeros, s_nbr.len);
 	return (s_nbr);
 }
 
