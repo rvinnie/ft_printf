@@ -32,7 +32,8 @@ t_parser	s_handler(t_parser s_parser, va_list *ap)
 	int		count_to_print;
 	int		count_ws;
 
-	str = va_arg(*ap, char *);
+	if (!(str = va_arg(*ap, char *)))
+		str = "(null)";
 	count_to_print = ft_strlen(str);
 	if (s_parser.precision != -1 && s_parser.precision < count_to_print)
 		count_to_print = s_parser.precision;

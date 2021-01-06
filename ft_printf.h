@@ -33,8 +33,11 @@ t_parser	check_precision(t_parser s_parser, va_list *ap);
 t_parser	handler(t_parser s_parser, va_list *ap);
 t_parser	c_handler(t_parser s_parser, va_list *ap);
 t_parser	s_handler(t_parser s_parser, va_list *ap);
+void		count_putstr(char *str, int count_print);
+void		minus_handler(char *str, int count_to_print, int count_ws, int flag);
 t_parser	digit_handler(t_parser s_parser, va_list *ap);
 t_parser	hex_handler(t_parser s_parser, va_list *ap);
+t_parser	null_handler(t_parser s_parser);
 t_nbr		precision_checker(t_parser s_parser, t_nbr s_nbr);
 
 #endif
