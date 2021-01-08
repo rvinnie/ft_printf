@@ -7,13 +7,14 @@ int main()
 	// int d = 10000;
 	// char *pb = &b;
 	// int *pd = &d;	
-	int *pn = NULL;
+	//int *pn = NULL;
 
 	// printf("%20p\n", pb);
 	// printf("%p\n", pd);
-	ft_printf("%d\n", ft_printf("%p\n", pn));
-	printf("%d\n", printf("%p\n", pn));
-
-
+	//ft_printf("%.p\n", NULL);
+	printf("%0-s\n", "123");
+	//ft_printf("%");
+	//ft_printf("%");
+	//printf("%d\n", printf("%010.5d\n", 216));
 	return (0);
 }

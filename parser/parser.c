@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/08 11:01:40 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/01/08 11:01:41 by rvinnie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ft_printf.h"
 
 t_parser	check_flags(t_parser s_parser)
@@ -23,6 +35,12 @@ t_parser	check_width(t_parser s_parser, va_list *ap)
 	if (*s_parser.format == '*')
 	{
 		s_parser.width = va_arg(*ap, int);
+		if (s_parser.width < 0)
+		{
+			s_parser.width *= -1;
+			s_parser.f_minus = 1;
+			s_parser.f_zero = 0;
+		}
 		s_parser.format++;
 	}
 	else
@@ -43,6 +61,8 @@ t_parser	check_precision(t_parser s_parser, va_list *ap)
 		if (*s_parser.format == '*')
 		{
 			s_parser.precision = va_arg(*ap, int);
+			if (s_parser.precision < -1)
+				s_parser.precision = -1;
 			s_parser.format++;
 		}
 		else

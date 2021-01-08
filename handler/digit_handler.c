@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   digit_handler.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/08 11:01:01 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/01/08 11:01:02 by rvinnie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ft_printf.h"
 
 int			nbrlen(long int n)
@@ -22,24 +34,38 @@ t_nbr		precision_checker(t_parser s_parser, t_nbr s_nbr)
 		s_nbr.prec_zeros = s_parser.precision - s_nbr.len;
 	else
 		s_nbr.prec_zeros = 0;
-	if (s_parser.width > s_nbr.prec_zeros + s_nbr.len && s_parser.f_zero)
-	{
-		s_nbr.width_zeros = s_parser.width - (s_nbr.prec_zeros + s_nbr.len);
-		s_nbr.prec_zeros = 0;
-	}
+	//if (s_parser.width > s_nbr.prec_zeros + s_nbr.len)
+	//{
+	//	s_nbr.width_zeros = s_parser.width - (s_nbr.prec_zeros + s_nbr.len);
+	//	s_nbr.prec_zeros = 0;
+	//}
+	if (s_nbr.prec_zeros < 1 && s_parser.width > s_nbr.len && s_parser.f_zero)
+		s_nbr.width_zeros = s_parser.width - s_nbr.len;
 	else
 		s_nbr.width_zeros = 0;
+	if (s_parser.precision <= s_nbr.len && s_parser.precision != -1)
+		s_nbr.width_zeros = 0;
+	//printf("%d %d %d\n", s_nbr.prec_zeros, s_nbr.len, s_nbr.width_zeros);
 	return (s_nbr);
 }
 
-void	ft_putnbr(long int num)
+t_parser	ft_putnbr(t_parser s_parser, long int num)
 {
 	char a;
 
+	if (s_parser.precision == 0 && num == 0)
+	{
+		if (s_parser.width != 0)
+			write(1, " ", 1);
+		else
+			s_parser.count--;
+		return (s_parser);
+	}
 	if (num > 9)
-		ft_putnbr(num / 10);
+		ft_putnbr(s_parser, num / 10);
 	a = num % 10 + 48;
 	write(1, &a, 1);
+	return (s_parser);
 }
 
 t_parser	create_str(t_parser s_parser, t_nbr s_nbr, long int nbr)
@@ -61,7 +87,7 @@ t_parser	create_str(t_parser s_parser, t_nbr s_nbr, long int nbr)
 		write(1, "-", 1);
 	while (zero_count--)
 		write(1, "0", 1);
-	ft_putnbr(nbr);
+	s_parser = ft_putnbr(s_parser, nbr);
 	if (s_parser.f_minus)
 	{
 		while (ws_count--)

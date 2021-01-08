@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/08 11:00:33 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/01/08 11:00:36 by rvinnie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <stdio.h> //delete
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-# include "libft/libft.h"
 
 typedef struct
 {
@@ -38,6 +49,7 @@ void		minus_handler(char *str, int count_to_print, int count_ws, int flag);
 t_parser	digit_handler(t_parser s_parser, va_list *ap);
 t_parser	hex_handler(t_parser s_parser, va_list *ap);
 t_parser	null_handler(t_parser s_parser);
+size_t		ft_strlen(const char *s);
 t_nbr		precision_checker(t_parser s_parser, t_nbr s_nbr);
 
 #endif

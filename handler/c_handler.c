@@ -1,7 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   c_handler.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/08 11:00:50 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/01/08 11:00:52 by rvinnie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ft_printf.h"
 
 void		write_str(t_parser s_parser, int count_ws, char ch)
 {
+	char	ws_or_zero;
+
+	ws_or_zero = ' ';
+	if (s_parser.type == '%' && s_parser.f_zero)
+		ws_or_zero = '0';
 	if (s_parser.f_minus)
 	{
 		write(1, &ch, 1);
@@ -11,7 +28,7 @@ void		write_str(t_parser s_parser, int count_ws, char ch)
 	else
 	{
 		while (count_ws--)
-			write(1, " ", 1);
+			write(1, &ws_or_zero, 1);
 		write(1, &ch, 1);
 	}
 }

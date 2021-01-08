@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handler.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/08 11:04:26 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/01/08 11:04:29 by rvinnie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ft_printf.h"
 
 t_parser	null_handler(t_parser s_parser)
@@ -6,9 +18,12 @@ t_parser	null_handler(t_parser s_parser)
 	int		count_to_print;
 	int		count_ws;
 
-	str = "(null)";
+	if (s_parser.precision == 0)
+		str = "0x";
+	else
+		str = "0x0";
 	count_to_print = ft_strlen(str);
-	if (s_parser.precision != -1 && s_parser.precision < count_to_print)
+	if (s_parser.precision > 0 && s_parser.precision < count_to_print)
 		count_to_print = s_parser.precision;
 	if (s_parser.width <= count_to_print)
 	{

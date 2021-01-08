@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hex_handler.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/08 11:01:09 by rvinnie           #+#    #+#             */
+/*   Updated: 2021/01/08 11:01:12 by rvinnie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ft_printf.h"
 
 int			hexlen(unsigned long int num)
@@ -15,27 +27,34 @@ int			hexlen(unsigned long int num)
 	return (len);
 }
 
-void		to_hex(unsigned long int num, char *arr, int flag)
+void		to_hex(t_parser s_parser, unsigned long int num, char *arr, int flag)
 {
 	int d;
 
+	if (s_parser.precision == 0 && num == 0)
+		return;
 	if (flag == 0 && num == 0)
 		write(1, "0", 1);
 	if (!num) return;
-	to_hex(num / 16, arr, 1);
+	to_hex(s_parser, num / 16, arr, 1);
 	d = arr[num % 16];
 	write(1, &d, 1);
 }
 
-void	print_prefix(int zero_count, char type)
+t_parser	print_prefix(t_parser s_parser, int zero_count, char type)
 {
 	if (type == 'p')
 	{
-		write(1, "0", 1);
-		write(1, "x", 1);
+		write(1, "0x", 2);
+		if (zero_count)
+		{
+			zero_count += 2;
+			s_parser.count += 2;
+		}
 	}
 	while (zero_count--)
 		write(1, "0", 1);
+	return (s_parser);
 }
 
 t_parser	create_hex_str(t_parser s_parser, t_nbr s_nbr, unsigned long int nbr)
@@ -53,11 +72,11 @@ t_parser	create_hex_str(t_parser s_parser, t_nbr s_nbr, unsigned long int nbr)
 		while (ws_count--)
 			write(1, " ", 1);
 	}
-	print_prefix(zero_count, s_parser.type);
+	s_parser = print_prefix(s_parser, zero_count, s_parser.type);
 	if (s_parser.type == 'x' || s_parser.type == 'p')
-		to_hex(nbr, "0123456789abcdef", 0);
+		to_hex(s_parser, nbr, "0123456789abcdef", 0);
 	else
-		to_hex(nbr, "0123456789ABCDEF", 0);
+		to_hex(s_parser, nbr, "0123456789ABCDEF", 0);
 	if (s_parser.f_minus)
 	{
 		while (ws_count--)
@@ -76,7 +95,10 @@ t_parser	hex_handler(t_parser s_parser, va_list *ap)
 		nbr = va_arg(*ap, unsigned long int);
 	else
 		nbr = va_arg(*ap, unsigned int);
-	s_nbr.len = hexlen(nbr);
+	if (nbr == 0 && s_parser.precision == 0)
+		s_nbr.len = 0;
+	else
+		s_nbr.len = hexlen(nbr);
 	if (s_parser.type == 'p')
 		s_nbr.len += 2;
 	if (nbr == 0 && s_parser.type == 'p')
