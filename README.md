@@ -1,7 +1,7 @@
 # ft_printf
 My simplified printf implementation (project for School 21).
 ### Usage
-Clone the repo  -> ```git clone https://github.com/rvinnie/libft```
+Clone the repo  -> ```git clone https://github.com/rvinnie/ft_printf```
  
 Go into the cloned folder and run **make**.
 This should create a file `libftprintf.a` (static library).  
