@@ -6,7 +6,7 @@
 #    By: rvinnie <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/08 14:47:02 by rvinnie           #+#    #+#              #
-#    Updated: 2021/01/08 14:47:03 by rvinnie          ###   ########.fr        #
+#    Updated: 2021/01/09 13:25:35 by rvinnie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,7 @@ SRCS		=	handler/handler.c \
 				handler/s_handler.c \
 				handler/ft_strlen.c \
 				parser/parser.c \
-				ft_printf.c \
-				main.c
+				ft_printf.c
 
 OBJS		=	$(SRCS:.c=.o)
 
@@ -37,9 +36,6 @@ $(NAME): $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 
 all:	$(NAME)
-
-test:
-	$(CC) -Wall -Wextra -Werror $(SRCS)
 
 clean:
 	@$(RM) $(OBJS) ft_printf.h.gch

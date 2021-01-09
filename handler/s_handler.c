@@ -31,7 +31,7 @@ void		minus_handler(char *str, int count_to_print, int count_ws, int flag)
 		count_putstr(str, count_to_print);
 		print_ws(count_ws);
 	}
-	else 
+	else
 	{
 		print_ws(count_ws);
 		count_putstr(str, count_to_print);

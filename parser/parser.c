@@ -67,8 +67,10 @@ t_parser	check_precision(t_parser s_parser, va_list *ap)
 		}
 		else
 		{
-			while (*s_parser.format >= 48 && *s_parser.format <= 57 && s_parser.precision > -1)
-				s_parser.precision = s_parser.precision * 10 + (*s_parser.format++ - '0');
+			while (*s_parser.format >= 48 && *s_parser.format <= 57 &&
+					s_parser.precision > -1)
+				s_parser.precision = s_parser.precision * 10 +
+					(*s_parser.format++ - '0');
 		}
 	}
 	return (s_parser);
