@@ -40,7 +40,7 @@ void		minus_handler(char *str, int count_to_print, int count_ws, int flag)
 
 t_parser	s_handler(t_parser s_parser, va_list *ap)
 {
-	char	*str;
+	char		*str;
 	int		count_to_print;
 	int		count_ws;
 
