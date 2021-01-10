@@ -35,7 +35,7 @@ void		write_str(t_parser s_parser, int count_ws, char ch)
 
 t_parser	c_handler(t_parser s_parser, va_list *ap)
 {
-	char	ch;
+	char		ch;
 	int		count_to_print;
 	int		count_ws;
 
