@@ -14,7 +14,7 @@
 
 t_parser	null_handler(t_parser s_parser)
 {
-	char	*str;
+	char		*str;
 	int		count_to_print;
 	int		count_ws;
 
