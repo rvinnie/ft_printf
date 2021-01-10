@@ -22,8 +22,8 @@ typedef struct
 	int			width;
 	int			precision;
 	int			count;
-	const char	*format;
-	char		type;
+	const char		*format;
+	char			type;
 }				t_parser;
 
 typedef struct
@@ -34,7 +34,7 @@ typedef struct
 	int			width_zeros;
 }				t_nbr;
 
-int				ft_printf(const char *format, ...);
+int			ft_printf(const char *format, ...);
 t_parser		parser(t_parser s_parser, va_list *ap);
 t_parser		check_flags(t_parser s_parser);
 t_parser		check_width(t_parser s_parser, va_list *ap);
